@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Exporter.pdf
+namespace Exporter.pdf.src
 {
     public class Class1
     {
