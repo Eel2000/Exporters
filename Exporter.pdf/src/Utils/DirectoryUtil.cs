@@ -13,7 +13,7 @@ namespace Exporter.pdf.Utils
         /// </summary>
         /// <param name="folderName">the folder name</param>
         /// <returns><see cref="string"/> the directory path.</returns>
-        public static string CheckOrCreateReportFolder(string folderName = "PDF.Exporter")
+        public static string CheckOrCreateReportFolder(string folderName = "PDF_Exporter")
         {
             var path = Path.Combine(Environment.GetFolderPath(_filePath), folderName);
             if (!Directory.Exists(path))
@@ -21,7 +21,7 @@ namespace Exporter.pdf.Utils
                 Directory.CreateDirectory(path);
             }
 
-            string realPath = path + "\"" + folderName + "\"" + $"{DateTime.Now.ToString(".dd.MM.yyyy")}.pdf";
+            string realPath = path + "\\" + folderName + $"{DateTime.Now.ToString("dd_MM_yyyy")}.pdf";
 
             return realPath;
         }
@@ -35,7 +35,7 @@ namespace Exporter.pdf.Utils
         {
             if (!File.Exists(path))
                 throw new AggregateException("File not found. unable to open it. please check the whole process");
-            
+
             var windowsProcess = new Process();
             windowsProcess.StartInfo = new ProcessStartInfo
             {
