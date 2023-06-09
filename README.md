@@ -43,4 +43,21 @@ using Exporter.pdf.Models;
  //Generate the pdf with default configuration
  Exporter.pdf.core.Exporter.Export(list, new DocumentConfiguration());
  ```
+ 
+ ```C#
+ 
+ //Advance configurations
+ var config = new DocumentConfiguration
+{
+    Title = "Data.pdf",
+    Destination = "C:",
+    Description = "simple description",
+    UseDefaultConfiguration = false,
+    DocumentTitle = "TestExportation",
+    Folder = "MyApp",
+    AutoOpenFile = false
+};
+ 
+  Exporter.pdf.core.Exporter.Export(list, config);
+ ```
  - The default configs export file to the desktop in the PDF_Exporter folder.
