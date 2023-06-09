@@ -26,6 +26,9 @@ namespace Exporter.pdf.Utils
             return realPath;
         }
 
+        public static void CreateIfNotExist(string part, string folder)
+            => Directory.CreateDirectory(Path.Combine(part, folder));
+
         /// <summary>
         /// Open the specified path file in appropriate app.
         /// </summary>
