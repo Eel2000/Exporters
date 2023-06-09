@@ -43,4 +43,4 @@ using Exporter.pdf.Models;
  //Generate the pdf with default configuration
  Exporter.pdf.core.Exporter.Export(list, new DocumentConfiguration());
  ```
- - 
+ - The default configs export file to the desktop in the PDF_Exporter folder.
