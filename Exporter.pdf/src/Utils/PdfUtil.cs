@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Exporter.pdf.Attributes;
+using Exporter.pdf.Models;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
@@ -20,7 +21,7 @@ namespace Exporter.pdf.Utils
         {
             //defines the table base measurements
             PdfPTable pdfPTable = new PdfPTable(props.Count());
-            pdfPTable.DefaultCell.Padding = 3;
+            pdfPTable.DefaultCell.Padding = 5;
             pdfPTable.WidthPercentage = 100;
             pdfPTable.HorizontalAlignment = Element.ALIGN_CENTER;
 
@@ -42,7 +43,19 @@ namespace Exporter.pdf.Utils
                 var propAttr = prop.GetCustomAttribute<Print>();
                 if (propAttr != null && propAttr.CanBePrinted)
                 {
-                    PdfPCell cell = new PdfPCell(new Phrase(propAttr.DisplayName ?? prop.Name));
+                    // PdfPCell cell = new PdfPHeaderCell(new Phrase(propAttr.DisplayName ?? prop.Name));
+                    PdfPHeaderCell cell = new PdfPHeaderCell(new PdfPHeaderCell()
+                    {
+                        Role = PdfName.TH,
+                        Name = propAttr.DisplayName ?? prop.Name,
+                        Scope = 3,
+                        BackgroundColor = BaseColor.GRAY,
+                        BorderColor = BaseColor.BLACK,
+                        VerticalAlignment = 3,
+                        Phrase = new Phrase(propAttr.DisplayName ?? prop.Name,
+                            new Font(Font.FontFamily.HELVETICA, 17, 1, BaseColor.WHITE)),
+                        MinimumHeight = 30f
+                    });
                     pdfPTable.AddCell(cell);
                 }
             }
@@ -106,6 +119,56 @@ namespace Exporter.pdf.Utils
                 Phrase title = new Phrase(DateTime.Now.ToString("f"));
 
                 document.Add(title);
+
+                document.Add(pdfPTable);
+
+                document.Close();
+            }
+
+            return (document, path);
+        }
+
+
+        public static (Document document, string path) CreateFileConfigurations(PdfPTable pdfPTable,
+            IEnumerable<PropertyInfo> printableProps, DocumentConfiguration configuration)
+        {
+            DirectoryUtil.CreateIfNotExist(configuration.Destination, configuration.Folder);
+
+            var path = Path.Combine(configuration.Destination, configuration.Folder, configuration.Title);
+
+            var constraint = printableProps.Count() < 7 ? PageSize.A4 : PageSize.A4.Rotate();
+
+            Document document = new Document(constraint, 10f, 10f, 40f, 10f);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                PdfWriter.GetInstance(document, stream);
+
+                document.Open();
+
+                var tFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, 4, BaseColor.CYAN);
+                Phrase title = new Phrase(new Chunk(configuration.DocumentTitle)
+                {
+                    Role = PdfName.HEADERS,
+                    Font = new Font(Font.FontFamily.HELVETICA, 20, 1, BaseColor.BLACK),
+                });
+
+                var pFont = new Font(Font.FontFamily.TIMES_ROMAN);
+                Paragraph paragraph = new Paragraph(configuration.Description)
+                {
+                    Alignment = 3,
+                    IndentationLeft = 10f,
+                    FirstLineIndent = 0f,
+                    Role = PdfName.P
+                };
+
+                document.Add(title);
+                document.AddHeader("TItle", "Hello world");
+                document.AddTitle("Text");
+                document.Add(new Chunk());
+                document.Add(new Chunk(){Role = PdfName.LINE});
+                document.Add(paragraph);
+                document.Add(new Chunk());
 
                 document.Add(pdfPTable);
 

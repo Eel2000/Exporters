@@ -7,7 +7,7 @@ namespace Exporter.pdf.Models
     public class DocumentConfiguration
     {
         /// <summary>
-        /// The title diplay in the document
+        /// the title of the printed document(file)
         /// </summary>
         public string Title { get; set; }
         

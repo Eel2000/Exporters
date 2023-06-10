@@ -26,21 +26,25 @@ namespace Exporter.pdf.Utils
             return realPath;
         }
 
+        public static void CreateIfNotExist(string part, string folder)
+            => Directory.CreateDirectory(Path.Combine(part, folder));
+
         /// <summary>
-        /// Open the specified path file in appropriate app.
+        /// Open the specified path file in its appropriate app.
         /// </summary>
         /// <param name="path"></param>
         /// <exception cref="AggregateException"></exception>
         public static void OpenFile(string path)
         {
             if (!File.Exists(path))
-                throw new AggregateException("File not found. unable to open it. please check the whole process");
+                throw new AggregateException("File not found. unable to open it.");
 
             var windowsProcess = new Process();
             windowsProcess.StartInfo = new ProcessStartInfo
             {
                 UseShellExecute = true,
-                FileName = path
+                FileName = path, 
+                ErrorDialog = true,
             };
             windowsProcess.Start();
         }

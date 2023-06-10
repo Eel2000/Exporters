@@ -38,7 +38,20 @@ namespace Exporter.pdf.core
             }
             else
             {
-                //TODO: use the developer config.
+                ConfigurationUtil.CheckConfiguration(document);
+
+                var printableProps = TypeUtil.GetPrintableProperties<TData>();
+
+                PdfPTable pdfPTable = PdfUtil.CreatePdfTable(printableProps);
+
+                var tableWithData = PdfUtil.InsertData(pdfPTable, data, printableProps);
+
+                var result = PdfUtil.CreateFileConfigurations(tableWithData, printableProps, document);
+
+                if (document.AutoOpenFile)
+                {
+                    DirectoryUtil.OpenFile(result.path);
+                }
             }
         }
     }
