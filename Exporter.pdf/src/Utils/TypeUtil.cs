@@ -25,7 +25,7 @@ namespace Exporter.pdf.Utils
                 p.GetCustomAttribute<Print>() != null && p.GetCustomAttribute<Print>().CanBePrinted);
 
             if (printableProps == null || !printableProps.Any())
-                throw new ArgumentException("Printable props not found.Please use the specified The printable props");
+                throw new ArgumentException("Printable props not found.Please use the **Print** Attribute to specifies The printable props");
 
             return printableProps;
         }

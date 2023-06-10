@@ -19,6 +19,8 @@ namespace Exporter.pdf.Utils
         /// <returns><see cref="PdfPTable"/></returns>
         public static PdfPTable CreatePdfTable(IEnumerable<PropertyInfo> props)
         {
+            if (!props.Any()) throw new AggregateException("Properties not found");
+            
             //defines the table base measurements
             PdfPTable pdfPTable = new PdfPTable(props.Count());
             pdfPTable.DefaultCell.Padding = 5;
@@ -37,6 +39,9 @@ namespace Exporter.pdf.Utils
         /// <returns><see cref="PdfPTable"/> the updated table.</returns>
         public static PdfPTable GenerateColumns(PdfPTable pdfPTable, IEnumerable<PropertyInfo> props)
         {
+            if (!props.Where(x => x.GetCustomAttribute<Print>() != null).Any())
+                throw new ArgumentException("Please specifies which property should be printed on the document as column.");
+            
             //defines the table's columns headers
             foreach (var prop in props)
             {

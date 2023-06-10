@@ -12,11 +12,12 @@ namespace Exporter.pdf
         /// <param name="data">list of data</param>
         /// <param name="configuration">configurations</param>
         /// <typeparam name="TData">data type</typeparam>
-        public static void Export<TData>(IEnumerable<TData> data, DocumentConfiguration configuration)
+        public static bool Export<TData>(IEnumerable<TData> data, DocumentConfiguration configuration)
         {
             try
             {
                 core.Exporter.Export(data, configuration);
+                return true;
             }
             catch (Exception e)
             {
@@ -31,11 +32,12 @@ namespace Exporter.pdf
         /// </summary>
         /// <param name="data">list of data to export</param>
         /// <typeparam name="TData">datatype</typeparam>
-        public static void Export<TData>(IEnumerable<TData> data)
+        public static bool Export<TData>(IEnumerable<TData> data)
         {
             try
             {
                 core.Exporter.Export(data, new DocumentConfiguration());
+                return true;
             }
             catch (Exception e)
             {
