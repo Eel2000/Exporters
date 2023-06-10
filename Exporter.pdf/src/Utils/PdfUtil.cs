@@ -21,7 +21,7 @@ namespace Exporter.pdf.Utils
         {
             //defines the table base measurements
             PdfPTable pdfPTable = new PdfPTable(props.Count());
-            pdfPTable.DefaultCell.Padding = 3;
+            pdfPTable.DefaultCell.Padding = 5;
             pdfPTable.WidthPercentage = 100;
             pdfPTable.HorizontalAlignment = Element.ALIGN_CENTER;
 
@@ -46,7 +46,7 @@ namespace Exporter.pdf.Utils
                     // PdfPCell cell = new PdfPHeaderCell(new Phrase(propAttr.DisplayName ?? prop.Name));
                     PdfPHeaderCell cell = new PdfPHeaderCell(new PdfPHeaderCell()
                     {
-                        Role = PdfName.H1,
+                        Role = PdfName.TH,
                         Name = propAttr.DisplayName ?? prop.Name,
                         Scope = 3,
                         BackgroundColor = BaseColor.GRAY,
@@ -147,14 +147,28 @@ namespace Exporter.pdf.Utils
                 document.Open();
 
                 var tFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, 4, BaseColor.CYAN);
-                Phrase title = new Phrase(0, configuration.DocumentTitle, tFont);
+                Phrase title = new Phrase(new Chunk(configuration.DocumentTitle)
+                {
+                    Role = PdfName.HEADERS,
+                    Font = new Font(Font.FontFamily.HELVETICA, 20, 1, BaseColor.BLACK),
+                });
 
                 var pFont = new Font(Font.FontFamily.TIMES_ROMAN);
-                Paragraph paragraph = new Paragraph(10,
-                    $"<p style='margin-bottom: 20px; margin-top: 10px;'>" + configuration.Description + $"</p>", pFont);
+                Paragraph paragraph = new Paragraph(configuration.Description)
+                {
+                    Alignment = 3,
+                    IndentationLeft = 10f,
+                    FirstLineIndent = 0f,
+                    Role = PdfName.P
+                };
 
                 document.Add(title);
+                document.AddHeader("TItle", "Hello world");
+                document.AddTitle("Text");
+                document.Add(new Chunk());
+                document.Add(new Chunk(){Role = PdfName.LINE});
                 document.Add(paragraph);
+                document.Add(new Chunk());
 
                 document.Add(pdfPTable);
 

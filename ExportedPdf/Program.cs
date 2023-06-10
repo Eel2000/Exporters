@@ -26,7 +26,7 @@ var config = new DocumentConfiguration
 {
     Title = "Data.pdf",
     Destination = "C:",
-    Description = "simple description",
+    Description = "simple description\n test",
     UseDefaultConfiguration = false,
     DocumentTitle = "TestExportation",
     Folder = "MyApp",
