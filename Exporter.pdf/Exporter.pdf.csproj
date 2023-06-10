@@ -2,19 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Title>SimplePDF</Title>
+    <Title>SimpleTabPDF</Title>
     <Copyright>Eliezer Bwana</Copyright>
-    <PackageTags>DotNet,C#,iTextSharp</PackageTags>
-    <Description>Base on iTextSharp, this package aimes to simplify the exportation of data using iTextSharp librairie.</Description>
+    <PackageTags>.Net,C#,iTextSharp</PackageTags>
+    <Description>Based on iTextSharp, this package aimes to simplify the exportation of data list to a pdf file data table using iTextSharp library.</Description>
     <Authors>Eliezer Bwana</Authors>
     <PackageOutputPath>C:\Users\CTRL TECH\Documents\APKs\Packages</PackageOutputPath>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageProjectUrl>https://github.com/Eel2000/Exporters</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Eel2000/Exporters</RepositoryUrl>
+    <PackageIcon>simple pdf logo.png</PackageIcon>
+    <PackageReleaseNotes>this is the first version</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\..\Downloads\Telegram Desktop\simple pdf logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
