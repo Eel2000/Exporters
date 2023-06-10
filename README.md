@@ -41,7 +41,7 @@ using Exporter.pdf.Models;
  
  
  //Generate the pdf with default configuration
- PdfExporter.Export(list, new DocumentConfiguration());
+ PdfExporter.Export(list);
  ```
  
  ```C#
