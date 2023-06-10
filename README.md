@@ -41,7 +41,7 @@ using Exporter.pdf.Models;
  
  
  //Generate the pdf with default configuration
- Exporter.pdf.core.Exporter.Export(list, new DocumentConfiguration());
+ PdfExporter.Export(list, new DocumentConfiguration());
  ```
  
  ```C#
@@ -58,7 +58,7 @@ using Exporter.pdf.Models;
     AutoOpenFile = false
 };
  
-  Exporter.pdf.core.Exporter.Export(list, config);
+  PdfExporter.Export(list, config);
  ```
  - The default configs export file to the desktop in the PDF_Exporter folder.
 
