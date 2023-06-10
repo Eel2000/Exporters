@@ -21,6 +21,8 @@ namespace Exporter.pdf.core
         {
             if (data is null) throw new ArgumentException("Data list specified is empty");
 
+            if (document is null) throw new ArgumentException("cannot proceed without configuration");
+
             if (document.UseDefaultConfiguration)
             {
                 var printableProps = TypeUtil.GetPrintableProperties<TData>();
