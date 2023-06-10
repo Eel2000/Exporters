@@ -7,18 +7,18 @@ Console.WriteLine("Hello, World!");
 var rnd = new Random();
 var list = new List<Data>()
 {
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
-    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" },
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
+    new Data() { Id = rnd.Next(10000, 99999), Type = "Customer" , Context = "Text for test"},
 };
 
 
@@ -39,5 +39,9 @@ public class Data
 {
     [Print(displayName: "Identifier")] public int Id { get; set; }
 
+    [Print(displayName:"Category")]
     public string Type { get; set; }
+    
+    [Print("Position")]
+    public string Context { get; set; }
 }

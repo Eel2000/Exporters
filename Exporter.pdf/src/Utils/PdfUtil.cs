@@ -43,7 +43,19 @@ namespace Exporter.pdf.Utils
                 var propAttr = prop.GetCustomAttribute<Print>();
                 if (propAttr != null && propAttr.CanBePrinted)
                 {
-                    PdfPCell cell = new PdfPCell(new Phrase(propAttr.DisplayName ?? prop.Name));
+                    // PdfPCell cell = new PdfPHeaderCell(new Phrase(propAttr.DisplayName ?? prop.Name));
+                    PdfPHeaderCell cell = new PdfPHeaderCell(new PdfPHeaderCell()
+                    {
+                        Role = PdfName.H1,
+                        Name = propAttr.DisplayName ?? prop.Name,
+                        Scope = 3,
+                        BackgroundColor = BaseColor.GRAY,
+                        BorderColor = BaseColor.BLACK,
+                        VerticalAlignment = 3,
+                        Phrase = new Phrase(propAttr.DisplayName ?? prop.Name,
+                            new Font(Font.FontFamily.HELVETICA, 17, 1, BaseColor.WHITE)),
+                        MinimumHeight = 30f
+                    });
                     pdfPTable.AddCell(cell);
                 }
             }
@@ -138,7 +150,8 @@ namespace Exporter.pdf.Utils
                 Phrase title = new Phrase(0, configuration.DocumentTitle, tFont);
 
                 var pFont = new Font(Font.FontFamily.TIMES_ROMAN);
-                Paragraph paragraph = new Paragraph(10, configuration.Description, pFont);
+                Paragraph paragraph = new Paragraph(10,
+                    $"<p style='margin-bottom: 20px; margin-top: 10px;'>" + configuration.Description + $"</p>", pFont);
 
                 document.Add(title);
                 document.Add(paragraph);
